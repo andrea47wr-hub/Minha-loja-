@@ -1,0 +1,21 @@
+MINHA LOJA — VERSÃO LOCAL PARA ANDROID
+
+O que esta versão já contém:
+- Senha local de acesso
+- Cadastro de clientes e produtos
+- Registro de vendas e pagamentos parciais
+- Despesas e reposição
+- Resumo de caixa e relatórios por período
+- Exportação e restauração de backup
+- Preparação para funcionar offline após a primeira abertura com conexão
+
+IMPORTANTE:
+1. Este pacote é um protótipo web instalável (PWA), não um APK nativo.
+2. Os dados ficam no armazenamento local do navegador deste aparelho; não são enviados a uma base de dados na nuvem.
+3. Para instalar como aplicativo e habilitar o modo offline, os arquivos precisam ser publicados uma vez em um endereço HTTPS e abertos no Chrome do Android. O endereço serve apenas os arquivos do app; os dados ficam no celular.
+4. A versão do pacote ainda não foi testada em aparelho real. Teste com dados fictícios antes de usar para a loja.
+5. A senha local é uma proteção básica, não criptografia forte do banco. Quem conseguir acessar os dados locais do navegador pode potencialmente contornar essa proteção. Não use este protótipo para informações altamente sensíveis.
+6. Faça backup frequente pelo menu Backup. Se limpar os dados do navegador ou perder o aparelho sem backup, os registros podem ser perdidos.
+
+Como testar no computador:
+- Abra index.html num navegador moderno. Algumas funções, como instalação e modo offline, exigem HTTPS e não funcionam ao abrir diretamente o arquivo.

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#16834a"><meta name="description" content="Minha Loja: controle local de vendas e caixa">
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<title>Minha Loja</title>
+<style>
+:root{--green:#16834a;--dark:#0b5d32;--bg:#f3f8f4;--line:#dbe7de;--text:#173322;--red:#b42318}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px system-ui,-apple-system,Segoe UI,sans-serif}
+header{background:var(--green);color:white;padding:18px 16px;padding-top:calc(18px + env(safe-area-inset-top));position:sticky;top:0;z-index:2}
+header h1{font-size:22px;margin:0}header p{margin:4px 0 0;font-size:13px;opacity:.92}
+main{max-width:850px;margin:auto;padding:14px 12px 90px}.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px;margin:12px 0;box-shadow:0 2px 8px #17332208}
+h2{font-size:19px;margin:0 0 12px}h3{font-size:16px;margin:0 0 8px}
+label{display:block;font-size:13px;font-weight:650;margin:10px 0 5px}input,select,textarea{width:100%;font:inherit;padding:12px;border:1px solid #c7d7cb;border-radius:10px;background:#fff;color:var(--text)}button{font:inherit;font-weight:650;border:0;border-radius:10px;padding:12px 14px;background:var(--green);color:white;cursor:pointer}button.secondary{background:#e5f3e9;color:var(--dark)}button.danger{background:#b42318}button.small{padding:7px 10px;font-size:13px}.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1;min-width:120px}.nav{display:flex;gap:7px;overflow:auto;padding:8px 0;position:sticky;top:76px;background:var(--bg);z-index:1}.nav button{white-space:nowrap;padding:9px 12px;font-size:14px}.nav button.active{background:var(--dark)}.hidden{display:none!important}.muted{color:#617567;font-size:13px}.metric{font-size:25px;font-weight:800;color:var(--dark)}.item{border-top:1px solid var(--line);padding:10px 0;display:flex;gap:8px;align-items:flex-start;justify-content:space-between}.item:first-child{border-top:0}.item .details{min-width:0;flex:1;overflow-wrap:anywhere}.pill{display:inline-block;border-radius:99px;background:#e5f3e9;color:#135c32;padding:3px 8px;font-size:12px}.notice{background:#fff8e6;border:1px solid #f1d28a;border-radius:10px;padding:10px;font-size:13px}.dangertext{color:var(--red)}.empty{padding:18px;text-align:center;color:#718275}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}@media(min-width:600px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header><h1>Minha Loja</h1><p>Controle da loja • dados salvos neste celular</p></header>
+<main>
+<section id="lock" class="card">
+<h2 id="lockTitle">Criar sua senha</h2>
+<p class="muted" id="lockText">Escolha uma senha para proteger o acesso a este aplicativo.</p>
+<form id="authForm">
+<label for="password">Senha</label><input id="password" type="password" minlength="4" autocomplete="current-password" required placeholder="Pelo menos 4 caracteres">
+<div id="confirmWrap"><label for="confirmPassword">Repita a senha</label><input id="confirmPassword" type="password" minlength="4" autocomplete="new-password" placeholder="Digite a mesma senha"></div>
+<p id="authError" class="dangertext"></p><button type="submit" id="authButton">Criar senha</button>
+</form>
+<p class="notice">A senha é guardada neste aparelho. Se você apagar os dados do navegador ou perder o celular, poderá perder o acesso aos dados. Faça cópias de segurança regularmente.</p>
+</section>
+<section id="app" class="hidden">
+<div class="nav" id="nav">
+<button class="active" data-page="inicio">Início</button><button data-page="clientes">Clientes</button><button data-page="produtos">Produtos</button><button data-page="vendas">Vendas</button><button data-page="despesas">Despesas</button><button data-page="relatorios">Relatórios</button><button data-page="seguranca">Backup</button>
+</div>
+<section id="page-inicio" class="page">
+<div class="grid">
+<div class="card"><div class="muted">Vendas recebidas</div><div class="metric" id="mRecebido">R$ 0,00</div></div>
+<div class="card"><div class="muted">A receber</div><div class="metric" id="mAberto">R$ 0,00</div></div>
+<div class="card"><div class="muted">Despesas</div><div class="metric" id="mDespesas">R$ 0,00</div></div>
+<div class="card"><div class="muted">Saldo estimado</div><div class="metric" id="mSaldo">R$ 0,00</div></div>
+</div>
+<div class="card"><h2>Atalhos</h2><div class="row"><button data-goto="vendas">+ Registrar venda</button><button class="secondary" data-goto="clientes">+ Cliente</button><button class="secondary" data-goto="despesas">+ Despesa</button></div></div>
+<div class="card"><h2>Últimas vendas</h2><div id="recentSales"></div></div>
+<div class="notice">Seus registros ficam no armazenamento local deste navegador/aplicativo. Não há sincronização com a nuvem neste modelo.</div>
+</section>
+<section id="page-clientes" class="page hidden">
+<div class="card"><h2>Novo cliente</h2><form id="customerForm"><label>Nome *</label><input name="name" required><label>Telefone (opcional)</label><input name="phone" inputmode="tel"><label>Observações (opcional)</label><textarea name="notes" rows="2"></textarea><button type="submit">Salvar cliente</button></form></div>
+<div class="card"><h2>Clientes cadastrados</h2><input id="customerSearch" placeholder="Buscar cliente..."><div id="customersList"></div></div>
+</section>
+<section id="page-produtos" class="page hidden">
+<div class="card"><h2>Novo produto</h2><form id="productForm"><label>Nome do produto *</label><input name="name" required><div class="row"><div><label>Preço de venda (R$) *</label><input name="price" type="number" min="0" step=".01" required></div><div><label>Custo/reposição (R$)</label><input name="cost" type="number" min="0" step=".01" value="0"></div></div><button type="submit">Salvar produto</button></form></div>
+<div class="card"><h2>Produtos</h2><div id="productsList"></div></div>
+</section>
+<section id="page-vendas" class="page hidden">
+<div class="card"><h2>Registrar venda</h2><form id="saleForm"><label>Cliente</label><select name="customer" id="saleCustomer"><option value="">Venda sem cliente</option></select><label>Produto *</label><select name="product" id="saleProduct" required></select><div class="row"><div><label>Quantidade *</label><input name="qty" type="number" min="1" step="1" value="1" required></div><div><label>Valor total (R$) *</label><input name="total" id="saleTotal" type="number" min="0" step=".01" required></div></div><div class="row"><div><label>Valor pago agora (R$)</label><input name="paid" type="number" min="0" step=".01" value="0"></div><div><label>Data</label><input name="date" type="date" required></div></div><label>Observações</label><input name="notes"><button type="submit">Salvar venda</button></form><p class="muted">O valor a receber será calculado automaticamente. Para pagamentos posteriores, use “Registrar pagamento” na venda.</p></div>
+<div class="card"><h2>Histórico de vendas</h2><div id="salesList"></div></div>
+</section>
+<section id="page-despesas" class="page hidden">
+<div class="card"><h2>Registrar despesa</h2><form id="expenseForm"><label>Descrição *</label><input name="description" required placeholder="Ex.: reposição de mercadoria"><div class="row"><div><label>Categoria</label><select name="category"><option>Reposição</option><option>Aluguel</option><option>Transporte</option><option>Taxas</option><option>Outras</option></select></div><div><label>Valor (R$) *</label><input name="amount" type="number" min=".01" step=".01" required></div></div><label>Data</label><input name="date" type="date" required><button type="submit">Salvar despesa</button></form></div>
+<div class="card"><h2>Despesas registradas</h2><div id="expensesList"></div></div>
+</section>
+<section id="page-relatorios" class="page hidden">
+<div class="card"><h2>Relatórios</h2><div class="row"><div><label>De</label><input type="date" id="reportFrom"></div><div><label>Até</label><input type="date" id="reportTo"></div></div><button id="runReport">Gerar relatório</button><div id="reportResults"></div></div>
+</section>
+<section id="page-seguranca" class="page hidden">
+<div class="card"><h2>Cópia de segurança</h2><p>Exporte seus dados para um arquivo e guarde-o em local seguro. O arquivo pode conter informações de clientes e vendas.</p><button id="exportBtn">Exportar backup</button><label for="importFile">Restaurar backup deste aplicativo</label><input id="importFile" type="file" accept="application/json"><button class="danger" id="logoutBtn" style="margin-top:16px">Bloquear aplicativo</button></div>
+<div class="card"><h2>Sobre os dados</h2><p class="muted">Os dados não são enviados para um servidor. Se limpar os dados do navegador, desinstalar o aplicativo ou perder o aparelho sem backup, os registros podem ser perdidos.</p></div>
+</section>
+</section>
+</main>
+<script src="app.js"></script>
+</body></html>
