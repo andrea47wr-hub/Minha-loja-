@@ -7,6 +7,13 @@ O que esta versão já contém:
 - Despesas e reposição
 - Resumo de caixa e relatórios por período
 - Exportação e restauração de backup
+- Ficha do cliente: todas as compras do mesmo cliente ficam juntas, agrupadas por mês
+- Produto com valor pago lança a despesa automaticamente (valor x quantidade)
+- Painel automático no Início, por período: lucro, vendas por mês, clientes, produtos, despesas e quem deve
+- Controle de estoque: baixa a cada venda, volta se excluir a venda, alerta de estoque baixo
+- Tema claro/escuro automático (ou escolha manual em Backup e ajustes)
+- Data de cobrança nas vendas, lista de cobranças no Início e notificações (com o app aberto/em uso)
+- Botão de WhatsApp direto no cliente, com mensagem de cobrança pronta
 - Preparação para funcionar offline após a primeira abertura com conexão
 
 IMPORTANTE:
