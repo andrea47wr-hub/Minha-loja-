@@ -1,33 +1,129 @@
-MINHA LOJA — VERSÃO LOCAL PARA ANDROID
+MINHA LOJA — COMO USAR O APP
+============================
 
-O que esta versão já contém:
-- Abre direto, sem senha
-- Cadastro de clientes e produtos
-- Registro de vendas e pagamentos parciais
-- Despesas e reposição
-- Resumo de caixa e relatórios por período
-- Exportação e restauração de backup
-- Ficha do cliente: todas as compras do mesmo cliente ficam juntas, agrupadas por mês
-- Produto com valor pago lança a despesa automaticamente (valor x quantidade)
-- Painel automático no Início, por período: lucro, vendas por mês, clientes, produtos, despesas e quem deve
-- Controle de estoque: baixa a cada venda, volta se excluir a venda, alerta de estoque baixo
-- Tema claro/escuro automático (ou escolha manual em Backup e ajustes)
-- Data de cobrança nas vendas, lista de cobranças no Início e notificações (com o app aberto/em uso)
-- Botão de WhatsApp direto no cliente, com mensagem de cobrança pronta
-- Preparação para funcionar offline após a primeira abertura com conexão
-- Busca (lupa) e ordem alfabética ao escolher o produto da venda
-- Editar uma venda já registrada (cliente, produto, quantidade, valores, datas)
-- Início mostra quanto você tem a receber em cada mês
-- Aviso de vendas com data futura (ex.: dezembro estando em novembro) e bloqueio de data futura nos formulários
-- Aba Pessoal: despesas pessoais (posto, feira, padaria...) separadas da loja, com total e setor que mais gastou
+O Minha Loja controla clientes, produtos, vendas, cobranças e despesas da sua loja, e também as suas despesas pessoais (separadas). Tudo fica salvo no seu celular. O app não tem senha: ele abre direto.
 
-IMPORTANTE:
-1. Este pacote é um protótipo web instalável (PWA), não um APK nativo.
-2. Os dados ficam no armazenamento local do navegador deste aparelho; não são enviados a uma base de dados na nuvem.
-3. Para instalar como aplicativo e habilitar o modo offline, os arquivos precisam ser publicados uma vez em um endereço HTTPS e abertos no Chrome do Android. O endereço serve apenas os arquivos do app; os dados ficam no celular.
-4. A versão do pacote ainda não foi testada em aparelho real. Teste com dados fictícios antes de usar para a loja.
-5. O app não tem mais senha: quem abrir o app neste aparelho vê os dados. Use o bloqueio de tela do celular.
-6. Faça backup frequente pelo menu Backup. Se limpar os dados do navegador ou perder o aparelho sem backup, os registros podem ser perdidos.
+Os botões de navegação ficam no alto da tela: Início, Clientes, Produtos, Vendas, Despesas, Pessoal, Relatórios e Backup e ajustes. Deslize para o lado para ver todos.
 
-Como testar no computador:
-- Abra index.html num navegador moderno. Algumas funções, como instalação e modo offline, exigem HTTPS e não funcionam ao abrir diretamente o arquivo.
+
+1) INSTALAR NO CELULAR
+----------------------
+- Os arquivos precisam estar publicados num endereço HTTPS (o seu hub).
+- Abra o endereço no Chrome do Android. Toque nos três pontinhos e escolha "Instalar app" ou "Adicionar à tela inicial".
+- Depois da primeira abertura com internet, o app também funciona sem internet.
+- Para pegar uma versão nova: depois de atualizar os arquivos no hub, abra o app com internet. Se ainda aparecer a versão antiga, feche o app e abra de novo.
+- Use sempre o mesmo endereço. Se mudar de endereço, os dados não aparecem (eles ficam ligados ao endereço). Nesse caso, restaure um backup.
+
+
+2) PRIMEIROS PASSOS (ordem recomendada)
+---------------------------------------
+1. Cadastre seus produtos (aba Produtos).
+2. Cadastre seus clientes (aba Clientes).
+3. Registre as vendas (aba Vendas).
+4. Acompanhe tudo no Início.
+5. Faça um backup de vez em quando (aba Backup e ajustes).
+
+
+3) INÍCIO (painel principal)
+----------------------------
+De cima para baixo:
+- Cobranças: vendas com data de cobrança chegando (até 7 dias) ou atrasadas. Dá para cobrar pelo WhatsApp ou registrar o pagamento ali mesmo.
+- Vendas com data futura: aparece só se alguma venda foi lançada com data depois de hoje (quase sempre erro de digitação). Toque em "Corrigir data".
+- Precisa repor: produtos sem estoque ou no limite de aviso. Mostra quantas unidades restam, a quantidade sugerida para comprar (leva o estoque ao dobro do limite de aviso) e o gasto estimado. O botão "Registrar compra" lança a compra.
+- Produtos: gasto e lucro (soma de tudo, sem filtro de período):
+  * Gasto comprando produtos: quanto você pagou nos produtos que comprou.
+  * Total vendido e Custo dos produtos vendidos.
+  * Lucro total: total vendido menos o custo dos produtos vendidos. Não desconta despesas da loja como aluguel.
+  * Dinheiro parado em estoque: quanto você pagou nos produtos que ainda não vendeu.
+  * Lucro previsto do estoque: quanto vai lucrar se vender todo o estoque pelo preço cadastrado.
+  * Produtos que mais deram lucro.
+- Período do painel: escolha Este mês, Mês passado, Últimos 30 dias, Este ano ou Tudo. Os quadros logo abaixo e os gráficos seguem esse período:
+  * Vendas recebidas: dinheiro que já entrou das vendas do período.
+  * A receber: o que ainda falta pagar dessas vendas.
+  * Despesas da loja e Saldo estimado (recebido menos despesas).
+- A receber nos meses: total que você tem a receber e quanto cai em cada mês. Agrupa pelo mês da data de cobrança; vendas sem data de cobrança entram no mês da venda.
+- Lucro do período, Vendas por mês, Quem mais compra, Produtos mais vendidos, Despesas por categoria e Clientes com valor em aberto.
+- Atalhos para registrar venda, cliente, despesa e despesa pessoal. No fim ficam as últimas vendas.
+
+
+4) PRODUTOS
+-----------
+Cadastrar: nome, preço de venda, quanto você pagou por unidade, quantidade (entra no estoque), "Avisar quando restar até" e data da compra.
+- Se você informar quanto pagou, o app lança sozinho a despesa (valor x quantidade) em Despesas, como "automática".
+- A lista fica em ordem alfabética e tem a lupa para buscar.
+Em cada produto:
+- Registrar compra: use quando comprar mais unidades. Aumenta o estoque e lança a despesa.
+- Ajustar estoque: corrige a quantidade que você tem e o limite de aviso.
+- Excluir: as vendas antigas são mantidas.
+
+
+5) CLIENTES
+-----------
+- Cadastre nome, telefone com DDD (usado no WhatsApp) e observações. Se o nome já existe, o app abre a ficha dele.
+- Ordene por ordem alfabética, mais compras, maior valor, maior valor em aberto ou compra mais recente. Use a lupa para buscar.
+- Cores: azul = compra muito (a quantidade é configurável em Backup e ajustes); laranja = comprou pouco; cinza = ainda não comprou. O coração ❤️ aparece para quem paga sempre em dia.
+- Ficha do cliente (toque no nome): todas as compras agrupadas por mês, total comprado, quanto já pagou, quanto deve e o histórico de pagamentos.
+  * Registrar pagamento: o valor abate da dívida começando pelas compras mais antigas.
+  * Nova venda: abre a venda já com esse cliente.
+  * WhatsApp / Cobrar no WhatsApp: abre a conversa com a mensagem de cobrança pronta.
+  * Editar dados: muda nome, telefone e observações.
+
+
+6) VENDAS
+---------
+Registrar uma venda:
+1. Escolha o cliente (ou deixe "Venda sem cliente").
+2. Escolha o produto. Use a lupa para buscar; a lista está em ordem alfabética.
+3. Informe a quantidade. O valor total é preenchido sozinho (preço x quantidade), mas você pode mudar.
+4. Em "Valor pago agora", coloque o que o cliente já pagou. O resto fica como "a receber".
+5. Confira a data (não aceita data futura). Se quiser, coloque a data de cobrança e uma observação.
+6. Toque em Salvar venda. O estoque baixa sozinho.
+No histórico de vendas, cada venda tem:
+- Registrar pagamento: quando o cliente paga mais um pedaço.
+- Data de cobrança: define ou remove quando cobrar (digite dd/mm/aaaa ou o número de dias, ex.: 7).
+- Editar venda: corrige cliente, produto, quantidade, total, valor pago e datas, se errou no cadastro. O estoque é ajustado automaticamente. Se mudar o valor pago, o histórico de pagamentos dessa venda vira um único pagamento na data da venda.
+- Excluir: apaga a venda e devolve o produto ao estoque.
+
+
+7) DESPESAS (da loja)
+---------------------
+Registre aluguel, transporte, taxas, reposição e outras. As compras de produtos entram sozinhas. Essas despesas entram no caixa, no painel e nos relatórios da loja.
+
+
+8) PESSOAL (despesas pessoais)
+------------------------------
+Aba separada para gastos seus, como posto de gasolina, feira e padaria. Não entram no caixa, no lucro nem nos relatórios da loja.
+- Escolha o setor, informe o valor e a data. A descrição é opcional.
+- Para um setor que não existe, escolha "➕ Nova categoria…" na lista.
+- Escolha o período (Este mês, Mês passado, Últimos 30 dias, Este ano, Tudo) e veja: total gasto, o setor em que mais gastou (com a porcentagem), gasto por setor, gasto por mês e a lista de lançamentos.
+- Cada lançamento pode ser editado ou excluído.
+
+
+9) RELATÓRIOS
+-------------
+Escolha as datas "De" e "Até" e toque em Gerar relatório. Mostra o total vendido, o recebido, o que está em aberto, as despesas da loja, o saldo estimado, os clientes que mais compraram e os produtos mais vendidos.
+
+
+10) BACKUP E AJUSTES
+--------------------
+- Exportar backup: gera um arquivo com todos os seus dados (loja e pessoal). Guarde no Google Drive ou envie para você mesma no WhatsApp.
+- Restaurar backup: escolha o arquivo exportado. Isso substitui os dados atuais.
+- Aparência: tema claro, escuro ou automático, cor do app, visual 3D ou simples e sons dos botões.
+- Classificação de clientes: a partir de quantas compras o cliente é "compra muito".
+- Avisos de cobrança: ative as notificações. Elas aparecem com o app aberto ou em uso; com o app totalmente fechado o Android não avisa. A lista de cobranças sempre aparece no topo do Início.
+
+
+11) CUIDADOS IMPORTANTES
+------------------------
+- Os dados ficam só neste celular. Se limpar os dados do navegador, desinstalar o app ou perder o aparelho sem backup, os registros podem ser perdidos. Faça backup com frequência, principalmente antes de atualizar o app.
+- O app não tem senha. Quem abrir o app neste aparelho vê os dados. Use o bloqueio de tela do celular.
+- Este é um protótipo e ainda não foi testado em aparelho real. Confira os números com atenção nos primeiros dias.
+
+
+DÚVIDAS COMUNS
+--------------
+- "Vendi em dezembro estando em novembro": alguma venda está com a data errada. Veja o aviso "Vendas com data futura" no Início e corrija.
+- "O produto não aparece na venda": confira se a lupa está vazia ou se o produto foi cadastrado.
+- "Errei uma venda": use Editar venda no histórico de vendas.
+- "Errei o valor pago": use Editar venda e corrija o "Valor já pago".
+- "Quanto eu tenho a receber?": veja o quadro "A receber nos meses" no Início.
