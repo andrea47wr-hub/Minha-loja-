@@ -16,6 +16,8 @@ main{max-width:850px;margin:auto;padding:14px 12px 90px}.card{background:var(--c
 h2{font-size:19px;margin:0 0 12px}h3{font-size:16px;margin:0 0 8px}
 label{display:block;font-size:13px;font-weight:650;margin:10px 0 5px}input,select,textarea{width:100%;font:inherit;padding:12px;border:1px solid var(--field);border-radius:10px;background:var(--card);color:var(--text)}button{font:inherit;font-weight:650;border:0;border-radius:10px;padding:12px 14px;background:var(--green);color:white;cursor:pointer}button.secondary{background:var(--soft);color:var(--soft-text)}button.danger{background:#b42318}button.small{padding:7px 10px;font-size:13px}.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1;min-width:120px}.nav{display:flex;gap:7px;overflow:auto;padding:8px 0;position:sticky;top:76px;background:var(--bg);z-index:1}.nav button{white-space:nowrap;padding:9px 12px;font-size:14px}.nav button.active{background:var(--dark)}.hidden{display:none!important}.muted{color:var(--muted);font-size:13px}.metric{font-size:25px;font-weight:800;color:var(--metric)}.item{border-top:1px solid var(--line);padding:10px 0;display:flex;gap:8px;align-items:flex-start;justify-content:space-between}.item:first-child{border-top:0}.item .details{min-width:0;flex:1;overflow-wrap:anywhere}.pill{display:inline-block;border-radius:99px;background:var(--soft);color:var(--pill-text);padding:3px 8px;font-size:12px}.notice{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:10px;padding:10px;font-size:13px}.dangertext{color:var(--red)}.empty{padding:18px;text-align:center;color:var(--empty)}.bar{display:flex;align-items:center;gap:8px;margin:7px 0;font-size:14px}.bar .lbl{flex:0 0 38%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bar .track{flex:1;background:var(--soft);border-radius:99px;height:12px;overflow:hidden}.bar .fill{height:100%;background:var(--green);border-radius:99px}.bar .fill.exp{background:#d97706}.bar .val{flex:0 0 auto;font-weight:650;font-size:13px}.month{border-top:2px solid var(--line);margin-top:12px;padding-top:6px;font-weight:700;color:var(--metric)}.link{cursor:pointer}.search{position:relative;margin-bottom:6px}.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--muted);pointer-events:none}.search input{padding-left:42px}.swatches{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.swatch{width:42px;height:42px;border-radius:50%;padding:0;border:3px solid transparent}.swatch.sel{border-color:var(--text);box-shadow:0 0 0 2px var(--card) inset}.cn{font-weight:700}.cn-high{color:var(--c-high)}.cn-low{color:var(--c-low)}.cn-none{color:var(--muted)}.item.sale{flex-wrap:wrap}.item.sale .details{flex:1 1 100%}.pill.warn{background:var(--pw-bg);color:var(--pw-text)}.pill.bad{background:var(--pb-bg);color:var(--pb-text)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}@media(min-width:600px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 
+.modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.55);overflow:auto;padding:12px;display:flex;align-items:flex-start;justify-content:center}.modal>.card{width:100%;max-width:520px;margin:16px 0}
+
 /* ===== Visual 3D futurista (pode ser desligado em Ajustes) ===== */
 html.fx3d body{background:radial-gradient(900px 480px at 0% -5%,color-mix(in srgb,var(--green) 24%,transparent),transparent 62%),radial-gradient(700px 420px at 100% 8%,color-mix(in srgb,var(--green) 16%,transparent),transparent 60%),var(--bg);background-attachment:fixed;min-height:100vh}
 html.fx3d body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(color-mix(in srgb,var(--green) 9%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--green) 9%,transparent) 1px,transparent 1px);background-size:34px 34px;-webkit-mask-image:linear-gradient(#000,transparent 75%);mask-image:linear-gradient(#000,transparent 75%)}
@@ -56,22 +58,12 @@ html.fx3d .item{border-top-color:color-mix(in srgb,var(--green) 18%,var(--line))
 <body>
 <header><h1>Minha Loja</h1><p>Controle da loja • dados salvos neste celular</p></header>
 <main>
-<section id="lock" class="card">
-<h2 id="lockTitle">Criar sua senha</h2>
-<p class="muted" id="lockText">Escolha uma senha para proteger o acesso a este aplicativo.</p>
-<form id="authForm">
-<label for="password">Senha</label><input id="password" type="password" minlength="4" autocomplete="current-password" required placeholder="Pelo menos 4 caracteres">
-<div id="confirmWrap"><label for="confirmPassword">Repita a senha</label><input id="confirmPassword" type="password" minlength="4" autocomplete="new-password" placeholder="Digite a mesma senha"></div>
-<p id="authError" class="dangertext"></p><button type="submit" id="authButton">Criar senha</button>
-</form>
-<p class="notice">A senha é guardada neste aparelho. Se você apagar os dados do navegador ou perder o celular, poderá perder o acesso aos dados. Faça cópias de segurança regularmente.</p>
-</section>
-<section id="app" class="hidden">
+<section id="app">
 <div class="nav" id="nav">
-<button class="active" data-page="inicio">Início</button><button data-page="clientes">Clientes</button><button data-page="produtos">Produtos</button><button data-page="vendas">Vendas</button><button data-page="despesas">Despesas</button><button data-page="relatorios">Relatórios</button><button data-page="seguranca">Backup e ajustes</button>
+<button class="active" data-page="inicio">Início</button><button data-page="clientes">Clientes</button><button data-page="produtos">Produtos</button><button data-page="vendas">Vendas</button><button data-page="despesas">Despesas</button><button data-page="pessoal">Pessoal</button><button data-page="relatorios">Relatórios</button><button data-page="seguranca">Backup e ajustes</button>
 </div>
 <section id="page-inicio" class="page">
-<div id="dueBox"></div><div id="stockBox"></div>
+<div id="dueBox"></div><div id="futureBox"></div><div id="stockBox"></div>
 <div class="card"><label for="panelPeriod" style="margin-top:0">Período do painel</label><select id="panelPeriod"><option value="mes">Este mês</option><option value="mesPassado">Mês passado</option><option value="30d">Últimos 30 dias</option><option value="ano">Este ano</option><option value="tudo">Tudo</option></select><div class="muted" id="panelRange" style="margin-top:6px"></div></div>
 <div class="grid">
 <div class="card"><div class="muted">Vendas recebidas</div><div class="metric" id="mRecebido">R$ 0,00</div></div>
@@ -79,13 +71,14 @@ html.fx3d .item{border-top-color:color-mix(in srgb,var(--green) 18%,var(--line))
 <div class="card"><div class="muted">Despesas</div><div class="metric" id="mDespesas">R$ 0,00</div></div>
 <div class="card"><div class="muted">Saldo estimado</div><div class="metric" id="mSaldo">R$ 0,00</div></div>
 </div>
+<div class="card"><h2>A receber nos meses</h2><div id="panelReceivable"></div></div>
 <div class="card"><h2>Lucro do período</h2><div class="metric" id="mLucro">R$ 0,00</div><div class="muted" id="mLucroInfo"></div></div>
 <div class="card"><h2>Vendas por mês</h2><div id="panelMonths"></div></div>
 <div class="card"><h2>Quem mais compra</h2><div id="panelCustomers"></div></div>
 <div class="card"><h2>Produtos mais vendidos</h2><div id="panelProducts"></div></div>
 <div class="card"><h2>Despesas por categoria</h2><div id="panelExpenses"></div></div>
 <div class="card"><h2>Clientes com valor em aberto</h2><div id="panelDebtors"></div></div>
-<div class="card"><h2>Atalhos</h2><div class="row"><button data-goto="vendas">+ Registrar venda</button><button class="secondary" data-goto="clientes">+ Cliente</button><button class="secondary" data-goto="despesas">+ Despesa</button></div></div>
+<div class="card"><h2>Atalhos</h2><div class="row"><button data-goto="vendas">+ Registrar venda</button><button class="secondary" data-goto="clientes">+ Cliente</button><button class="secondary" data-goto="despesas">+ Despesa</button><button class="secondary" data-goto="pessoal">+ Despesa pessoal</button></div></div>
 <div class="card"><h2>Últimas vendas</h2><div id="recentSales"></div></div>
 <div class="notice">Seus registros ficam no armazenamento local deste navegador/aplicativo. Não há sincronização com a nuvem neste modelo.</div>
 </section>
@@ -101,18 +94,27 @@ html.fx3d .item{border-top-color:color-mix(in srgb,var(--green) 18%,var(--line))
 <div class="card"><h2>Produtos</h2><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="productSearch" type="search" placeholder="Buscar produto..."></div><div id="productsList"></div></div>
 </section>
 <section id="page-vendas" class="page hidden">
-<div class="card"><h2>Registrar venda</h2><form id="saleForm"><label>Cliente</label><select name="customer" id="saleCustomer"><option value="">Venda sem cliente</option></select><label>Produto *</label><select name="product" id="saleProduct" required></select><div class="muted" id="saleStockInfo" style="margin-top:5px"></div><div class="row"><div><label>Quantidade *</label><input name="qty" type="number" min="1" step="1" value="1" required></div><div><label>Valor total (R$) *</label><input name="total" id="saleTotal" type="number" min="0" step=".01" required></div></div><div class="row"><div><label>Valor pago agora (R$)</label><input name="paid" type="number" min="0" step=".01" value="0"></div><div><label>Data</label><input name="date" type="date" required></div></div><label>Data de cobrança (opcional)</label><input name="due" type="date"><label>Observações</label><input name="notes"><button type="submit">Salvar venda</button></form><p class="muted">O valor a receber será calculado automaticamente. Para pagamentos posteriores, use “Registrar pagamento” na venda.</p></div>
+<div class="card"><h2>Registrar venda</h2><form id="saleForm"><label>Cliente</label><select name="customer" id="saleCustomer"><option value="">Venda sem cliente</option></select><label>Produto *</label><div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="saleProductSearch" type="search" placeholder="Buscar produto..." autocomplete="off"></div><select name="product" id="saleProduct" required></select><div class="muted" id="saleStockInfo" style="margin-top:5px"></div><div class="row"><div><label>Quantidade *</label><input name="qty" type="number" min="1" step="1" value="1" required></div><div><label>Valor total (R$) *</label><input name="total" id="saleTotal" type="number" min="0" step=".01" required></div></div><div class="row"><div><label>Valor pago agora (R$)</label><input name="paid" type="number" min="0" step=".01" value="0"></div><div><label>Data</label><input name="date" type="date" required></div></div><label>Data de cobrança (opcional)</label><input name="due" type="date"><label>Observações</label><input name="notes"><button type="submit">Salvar venda</button></form><p class="muted">O valor a receber será calculado automaticamente. Para pagamentos posteriores, use “Registrar pagamento” na venda.</p></div>
 <div class="card"><h2>Histórico de vendas</h2><div id="salesList"></div></div>
 </section>
 <section id="page-despesas" class="page hidden">
 <div class="card"><h2>Registrar despesa</h2><form id="expenseForm"><label>Descrição *</label><input name="description" required placeholder="Ex.: reposição de mercadoria"><div class="row"><div><label>Categoria</label><select name="category"><option>Reposição</option><option>Aluguel</option><option>Transporte</option><option>Taxas</option><option>Outras</option></select></div><div><label>Valor (R$) *</label><input name="amount" type="number" min=".01" step=".01" required></div></div><label>Data</label><input name="date" type="date" required><button type="submit">Salvar despesa</button></form></div>
 <div class="card"><h2>Despesas registradas</h2><div id="expensesList"></div></div>
 </section>
+<section id="page-pessoal" class="page hidden">
+<div class="notice">As despesas pessoais ficam separadas da loja: não entram no caixa, no lucro, no painel nem nos relatórios da loja.</div>
+<div class="card"><h2 id="personalTitle">Nova despesa pessoal</h2><form id="personalForm"><div class="row"><div><label>Onde / setor</label><select name="category" id="pCategory"></select></div><div><label>Valor (R$) *</label><input name="amount" type="number" min=".01" step=".01" inputmode="decimal" required></div></div><label>Descrição (opcional)</label><input name="description" placeholder="Ex.: gasolina do carro, pão e leite"><label>Data</label><input name="date" type="date" required><div class="row" style="margin-top:12px"><button type="submit" id="personalBtn">Salvar despesa pessoal</button><button type="button" class="secondary hidden" id="personalCancel">Cancelar edição</button></div></form></div>
+<div class="card"><label for="pPeriod" style="margin-top:0">Período</label><select id="pPeriod"><option value="mes">Este mês</option><option value="mesPassado">Mês passado</option><option value="30d">Últimos 30 dias</option><option value="ano">Este ano</option><option value="tudo">Tudo</option></select><div class="muted" id="pRange" style="margin-top:6px"></div></div>
+<div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr))"><div class="card"><div class="muted">Total gasto</div><div class="metric" id="pTotal">R$ 0,00</div></div><div class="card"><div class="muted">Onde mais gastou</div><div class="metric" id="pTop" style="font-size:19px;overflow-wrap:anywhere">—</div><div class="muted" id="pTopInfo"></div></div></div>
+<div class="card"><h2>Gasto por setor</h2><div id="pCats"></div></div>
+<div class="card"><h2>Gasto por mês</h2><div id="pMonths"></div></div>
+<div class="card"><h2>Lançamentos</h2><div id="pList"></div></div>
+</section>
 <section id="page-relatorios" class="page hidden">
 <div class="card"><h2>Relatórios</h2><div class="row"><div><label>De</label><input type="date" id="reportFrom"></div><div><label>Até</label><input type="date" id="reportTo"></div></div><button id="runReport">Gerar relatório</button><div id="reportResults"></div></div>
 </section>
 <section id="page-seguranca" class="page hidden">
-<div class="card"><h2>Cópia de segurança</h2><p>Exporte seus dados para um arquivo e guarde-o em local seguro. O arquivo pode conter informações de clientes e vendas.</p><button id="exportBtn">Exportar backup</button><label for="importFile">Restaurar backup deste aplicativo</label><input id="importFile" type="file" accept="application/json"><button class="danger" id="logoutBtn" style="margin-top:16px">Bloquear aplicativo</button></div>
+<div class="card"><h2>Cópia de segurança</h2><p>Exporte seus dados para um arquivo e guarde-o em local seguro. O arquivo pode conter informações de clientes e vendas.</p><button id="exportBtn">Exportar backup</button><label for="importFile">Restaurar backup deste aplicativo</label><input id="importFile" type="file" accept="application/json"></div>
 <div class="card"><h2>Aparência</h2><label for="themeSelect" style="margin-top:0">Tema</label><select id="themeSelect"><option value="auto">Automático (segue o celular)</option><option value="light">Claro</option><option value="dark">Escuro</option></select><label>Cor do aplicativo</label><div class="swatches" id="swatches"></div><label for="accentCustom">Ou escolha qualquer cor</label><div class="swatches"><input type="color" id="accentCustom" value="#16834a" style="width:70px;height:44px;padding:3px"><button type="button" class="secondary" id="accentReset">Voltar ao verde</button></div><label for="fxSelect">Visual</label><select id="fxSelect"><option value="on">3D futurista</option><option value="off">Simples</option></select><label for="soundSelect">Sons ao tocar nos botões</label><select id="soundSelect"><option value="on">Ligados</option><option value="off">Desligados</option></select></div>
 <div class="card"><h2>Classificação de clientes</h2><label for="highN" style="margin-top:0">Cliente que “compra muito” a partir de quantas compras?</label><input id="highN" type="number" min="2" step="1" value="3"><p class="muted">Abaixo disso o nome fica em laranja (comprou pouco). O ❤️ aparece para quem tem 2 ou mais vendas quitadas em dia e nenhum atraso. “Em dia” = pagou até a data de cobrança, ou pagou tudo no dia da venda.</p></div>
 <div class="card"><h2>Avisos de cobrança</h2><p class="muted" id="notifStatus"></p><div class="row"><button id="notifBtn">Ativar notificações</button><button class="secondary hidden" id="notifTest">Testar notificação</button></div><p class="muted">Os avisos aparecem quando o app está aberto ou em uso. Como os dados ficam só neste celular, o Android não permite avisar com o app totalmente fechado. A lista de cobranças sempre aparece no topo do Início.</p></div>
@@ -120,5 +122,16 @@ html.fx3d .item{border-top-color:color-mix(in srgb,var(--green) 18%,var(--line))
 </section>
 </section>
 </main>
+<div id="editSaleModal" class="modal hidden"><div class="card"><h2>Editar venda</h2><form id="editSaleForm">
+<label>Cliente</label><select name="customer"></select>
+<label>Produto *</label><select name="product" required></select>
+<div class="row"><div><label>Quantidade *</label><input name="qty" type="number" min="1" step="1" required></div><div><label>Valor total (R$) *</label><input name="total" type="number" min="0" step=".01" required></div></div>
+<div class="row"><div><label>Valor já pago (R$)</label><input name="paid" type="number" min="0" step=".01"></div><div><label>Data da venda *</label><input name="date" type="date" required></div></div>
+<label>Data de cobrança (opcional)</label><input name="due" type="date">
+<label>Observações</label><input name="notes">
+<p class="muted">O estoque é ajustado sozinho se você mudar produto ou quantidade. Se mudar o valor pago, o histórico de pagamentos desta venda vira um único pagamento na data da venda.</p>
+<div class="row"><button type="submit">Salvar alterações</button><button type="button" class="secondary" id="editSaleCancel">Cancelar</button></div>
+</form></div></div>
+
 <script src="app.js"></script>
 </body></html>
