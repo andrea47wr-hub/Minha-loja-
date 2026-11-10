@@ -78,6 +78,7 @@ Registrar uma venda:
 4. Em "Valor pago agora", coloque o que o cliente já pagou. O resto fica como "a receber".
 5. Confira a data (não aceita data futura). Se quiser, coloque a data de cobrança e uma observação.
 6. Toque em Salvar venda. O estoque baixa sozinho.
+   Vendeu parcelado? Toque em "+ Adicionar outra data" e coloque uma data para cada parcela, com o valor (ou deixe em branco para dividir igualmente o que falta receber). O Início mostra cada data em "A receber nos meses".
 No histórico de vendas, cada venda tem:
 - Registrar pagamento: quando o cliente paga mais um pedaço.
 - Data de cobrança: define ou remove quando cobrar (digite dd/mm/aaaa ou o número de dias, ex.: 7).
