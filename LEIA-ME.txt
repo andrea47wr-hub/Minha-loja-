@@ -75,6 +75,7 @@ Registrar uma venda:
 1. Escolha o cliente (ou deixe "Venda sem cliente").
 2. Escolha o produto. Use a lupa para buscar; a lista está em ordem alfabética.
 3. Informe a quantidade. O valor total é preenchido sozinho (preço x quantidade), mas você pode mudar.
+   Mais de um produto na mesma venda? Toque em "+ Adicionar à venda" para cada produto. Eles ficam juntos na mesma ficha de venda e o valor total soma tudo (mude o total para dar desconto).
 4. Em "Valor pago agora", coloque o que o cliente já pagou. O resto fica como "a receber".
 5. Confira a data (não aceita data futura). Se quiser, coloque a data de cobrança e uma observação.
 6. Toque em Salvar venda. O estoque baixa sozinho.
@@ -82,7 +83,7 @@ Registrar uma venda:
 No histórico de vendas, cada venda tem:
 - Registrar pagamento: quando o cliente paga mais um pedaço.
 - Data de cobrança: define ou remove quando cobrar (digite dd/mm/aaaa ou o número de dias, ex.: 7).
-- Editar venda: corrige cliente, produto, quantidade, total, valor pago e datas, se errou no cadastro. O estoque é ajustado automaticamente. Se mudar o valor pago, o histórico de pagamentos dessa venda vira um único pagamento na data da venda.
+- Editar venda: corrige cliente, produtos (trocar, adicionar ou remover), quantidades, total, valor pago e datas, se errou no cadastro. O estoque é ajustado automaticamente. Se mudar o valor pago, o histórico de pagamentos dessa venda vira um único pagamento na data da venda.
 - Excluir: apaga a venda e devolve o produto ao estoque.
 
 
