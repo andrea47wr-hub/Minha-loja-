@@ -233,9 +233,9 @@ el.innerHTML='<div class="card"><h2>⚠️ Vendas com data futura</h2><p class="
 /* --- A receber por mês --- */
 function renderReceivable(){const el=$('#panelReceivable'),open=data.sales.filter(s=>openAmount(s)>0);
 if(!open.length){el.innerHTML='<div class="empty">Nada a receber. 🎉</div>';return}
-const g=groupBy(open,s=>(s.dueDate||s.date||'').slice(0,7)),keys=Object.keys(g).sort(),cur=today().slice(0,7),mx=Math.max(1,...keys.map(k=>sum(g[k],openAmount)));
-el.innerHTML=`<div class="muted">Total a receber</div><div class="metric">${money(sum(open,openAmount))}</div>`+keys.map(k=>{const v=sum(g[k],openAmount);return `<div class="month">${monthLabel(k)}${k===cur?' <span class="pill">este mês</span>':''}${k<cur?' <span class="pill bad">mês já passou</span>':''}</div>`+bars([{label:g[k].length+' venda(s)',value:v,text:money(v)}],'exp',mx)}).join('')+'<p class="muted">Agrupado pelo mês da data de cobrança. Vendas sem data de cobrança entram no mês da venda.</p>'}
-
+const t=today(),cur=t.slice(0,7),g=groupBy(open,s=>(s.dueDate||s.date||'').slice(0,7)),keys=Object.keys(g).sort();
+el.innerHTML=`<div class="muted">Total a receber</div><div class="metric">${money(sum(open,openAmount))}</div>`+keys.map(k=>{const days=groupBy(g[k],s=>s.dueDate||'sem');const dk=Object.keys(days).sort((a,b)=>a==='sem'?1:b==='sem'?-1:a.localeCompare(b));
+return `<div class="month">${monthLabel(k)} <span class="muted">• ${money(sum(g[k],openAmount))}</span>${k===cur?' <span class="pill">este mês</span>':''}</div>`+dk.map(d=>{const v=sum(days[d],openAmount),n=days[d].length,late=d!=='sem'&&d<t;return `<div class="item"><div class="details"><b>${d==='sem'?'Sem data de cobrança':'Dia '+(+d.slice(8))}</b>${late?' <span class="pill bad">atrasado</span>':d===t?' <span class="pill warn">hoje</span>':''}<div class="muted">${n} venda(s)</div></div><b>${money(v)}</b></div>`}).join('')}).join('')+'<p class="muted">Cada linha é o dia da data de cobrança. Vendas sem data de cobrança aparecem no mês da venda; defina a data em Vendas > Data de cobrança.</p>'}
 /* --- Editar venda --- */
 let editingSale=null;
 function closeEditSale(){editingSale=null;$('#editSaleModal').classList.add('hidden')}
